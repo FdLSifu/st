@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Droid Sans Mono:pixelsize=14:antialias=true:autohint=true";
+static char *font = "Hack:pixelsize=15:antialias=true:autohint=true";
 
 static int borderpx = 2;
 
@@ -116,39 +116,47 @@ static const char *colorname_orig[] = {
 	"black",
 };
 
+/* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
-  "#1d1f21", /* base00 */
-  "#cc342b", /* base08 */
-  "#198844", /* base0B */
-  "#fba922", /* base0A */
-  "#3971ed", /* base0D */
-  "#a36ac7", /* base0E */
-  "#3971ed", /* base0C */
-  "#c5c8c6", /* base05 */
-  "#969896", /* base03 */
-  "#f96a38", /* base09 */
-  "#282a2e", /* base01 */
-  "#373b41", /* base02 */
-  "#b4b7b4", /* base04 */
-  "#e0e0e0", /* base06 */
-  "#3971ed", /* base0F */
-  "#ffffff", /* base07 */
+
+  /* 8 normal colors */
+  [0] = "#263238", /* black   */
+  [1] = "#ff9800", /* red     */
+  [2] = "#8bc34a", /* green   */
+  [3] = "#ffc107", /* yellow  */
+  [4] = "#03a9f4", /* blue    */
+  [5] = "#e91e63", /* magenta */
+  [6] = "#009688", /* cyan    */
+  [7] = "#cfd8dc", /* white   */
+
+  /* 8 bright colors */
+  [8]  = "#37474f", /* black   */
+  [9]  = "#ffa74d", /* red     */
+  [10] = "#9ccc65", /* green   */
+  [11] = "#ffa000", /* yellow  */
+  [12] = "#81d4fa", /* blue    */
+  [13] = "#ad1457", /* magenta */
+  [14] = "#26a69a", /* cyan    */
+  [15] = "#eceff1", /* white   */
+
+  /* special colors */
+  [256] = "#263238", /* background */
+  [257] = "#eceff1", /* foreground */
 };
 
 /*
- *  * Default colors (colorname index)
- *   * foreground, background, cursor, reverse cursor
- *    */
-unsigned int defaultfg = 7;
-unsigned int defaultbg = 0;
-static unsigned int defaultcs = 13;
-static unsigned int defaultrcs = 0;
-
+ * Default colors (colorname index)
+ * foreground, background, cursor
+ */
+unsigned int defaultfg = 257;
+unsigned int defaultbg = 256;
+static unsigned int defaultcs = 257;
+static unsigned int defaultrcs = 257;
 /*
- *  * Colors used, when the specific fg == defaultfg. So in reverse mode this
- *   * will reverse too. Another logic would only make the simple feature too
- *    * complex.
- *     */
+ * Colors used, when the specific fg == defaultfg. So in reverse mode this
+ * will reverse too. Another logic would only make the simple feature too
+ * complex.
+ */
 static unsigned int defaultitalic = 7;
 static unsigned int defaultunderline = 7;
 
@@ -159,7 +167,7 @@ static unsigned int defaultunderline = 7;
  * 6: Bar ("|")
  * 7: Snowman ("☃")
  */
-static unsigned int cursorshape = 2;
+static unsigned int cursorshape = 4;
 
 /*
  * Default columns and rows numbers
